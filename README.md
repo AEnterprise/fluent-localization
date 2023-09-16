@@ -54,7 +54,8 @@ println!("{}", language_localizer.base_counter(2));
 println!("{}", language_localizer.base_compounded(2));
 ```
 
-And would print ```
+And would print
+```
 English
 count is at 2
 Compound exaple, count is at 2
