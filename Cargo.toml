@@ -1,0 +1,20 @@
+[workspace]
+members = [
+    "loader",
+    "bindgen",
+]
+
+resolver = "2"
+
+[workspace.dependencies]
+tracing = "0.1"
+anyhow = "1.0"
+fluent-syntax = "0.11"
+fluent-bundle = "0.15"
+intl-memoizer = "0.5"
+unic-langid = { version = "0.9"}
+quote = "1"
+syn = "2.0"
+proc-macro2 = "1.0"
+
+fluent-localization-loader = { path = "loader"}
