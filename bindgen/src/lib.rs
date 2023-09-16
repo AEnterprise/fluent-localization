@@ -6,11 +6,13 @@ use std::{
 };
 
 use fluent_bundle::FluentResource;
+use fluent_localization_loader::{
+    base_path, fold_displayable, load_resources_from_folder, DEFAULT_DIR,
+};
 use fluent_syntax::ast::{Entry, Expression, InlineExpression, PatternElement};
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::LitStr;
-use fluent_localization_loader::{fold_displayable, load_resources_from_folder, DEFAULT_DIR, base_path};
 
 //hardcode the alphabet, seems to be the fastest way to do this
 const ALPHABET: [char; 26] = [

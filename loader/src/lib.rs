@@ -1,4 +1,4 @@
-use std::{collections::HashMap, env, fs, path::PathBuf, sync::Arc, error::Error, fmt::Display};
+use std::{collections::HashMap, env, error::Error, fmt::Display, fs, path::PathBuf, sync::Arc};
 
 use fluent_bundle::{bundle::FluentBundle as RawBundle, FluentResource};
 
@@ -28,7 +28,7 @@ pub struct LocalizationHolder {
 }
 #[derive(Debug)]
 pub struct LocalizationLoadingError {
-    error: String
+    error: String,
 }
 
 impl LocalizationLoadingError {
@@ -37,7 +37,7 @@ impl LocalizationLoadingError {
     }
 }
 
-impl Error for LocalizationLoadingError{}
+impl Error for LocalizationLoadingError {}
 
 impl Display for LocalizationLoadingError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -106,7 +106,9 @@ impl LocalizationHolder {
     }
 
     pub fn get_bundle(&self, language: &str) -> &FluentBundle {
-        self.bundles.get(language).unwrap_or_else(|| self.get_bundle(language))
+        self.bundles
+            .get(language)
+            .unwrap_or_else(|| self.get_bundle(language))
     }
 
     pub fn get_default_bundle(&self) -> &FluentBundle {
