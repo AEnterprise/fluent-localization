@@ -1,9 +1,13 @@
 [package]
 name = "fluent-localization-bindgen"
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+keywords = ["fluent", "localization", "bindgen"]
+description = "Easy loading of fluent localization resources and generating code bindings for them"
+license.workspace = true
+categories.workspace = true
+homepage.workspace = true
+repository.workspace = true
 
 [lib]
 proc-macro = true

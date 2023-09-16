@@ -3,6 +3,13 @@ members = ["loader", "bindgen"]
 
 resolver = "2"
 
+[workspace.package]
+license = "MIT"
+categories = ["internationalization", "localization", "value-formatting"]
+homepage = "https://github.com/AEnterprise/fluent-localization"
+repository = "https://github.com/AEnterprise/fluent-localization"
+
+
 [workspace.dependencies]
 tracing = "0.1"
 anyhow = "1.0"
