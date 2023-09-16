@@ -59,3 +59,30 @@ English
 count is at 2
 Compound exaple, count is at 2
 ```
+
+You can use (a variation) of the following build.rs script to trigger a recompile of your bindings if the resource files change, you might need to move up a directory if your bindings are in a subcrate:
+
+**WARNING**: make sure you got the directory right, this points to a non existant file/folder, rust will always consider this package as needing to be recompiled
+```rust
+use std::{env, fs, path::PathBuf};
+
+fn main() {
+    println!("cargo:rerun-if-changed=build.rs");
+    println!("cargo:rerun-if-changed=src/lib.rs");
+    let mut path: PathBuf = env::current_dir().expect("couldn't determine curent dir");
+    path.push("localizations");
+    path.push("default");
+
+    let handle = fs::read_dir(path).expect("Failed to open localizations base dir");
+
+    for item in handle {
+        let item = item.expect("Failed to get handle in localizations dir");
+        let underlying_name = item.file_name();
+        let name = underlying_name.to_string_lossy();
+        if name.ends_with(".ftl") {
+            println!("cargo:rerun-if-changed=../../localizations/default/{name}");
+        }
+    }
+}
+
+```
