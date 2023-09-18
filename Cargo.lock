@@ -52,10 +52,10 @@ dependencies = [
 
 [[package]]
 name = "fluent-localization-bindgen"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "fluent-bundle",
- "fluent-localization-loader 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "fluent-localization-loader",
  "fluent-syntax",
  "proc-macro2",
  "quote",
@@ -65,20 +65,6 @@ dependencies = [
 [[package]]
 name = "fluent-localization-loader"
 version = "1.0.0"
-dependencies = [
- "anyhow",
- "fluent-bundle",
- "fluent-syntax",
- "intl-memoizer",
- "tracing",
- "unic-langid",
-]
-
-[[package]]
-name = "fluent-localization-loader"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "86dfea35f113fef230aa15ba151928e124be0e83bc575df8dcecbd973eb91daf"
 dependencies = [
  "anyhow",
  "fluent-bundle",
@@ -166,9 +152,9 @@ checksum = "62bb4feee49fdd9f707ef802e22365a35de4b7b299de4763d44bfea899442ff9"
 
 [[package]]
 name = "syn"
-version = "2.0.35"
+version = "2.0.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "59bf04c28bee9043ed9ea1e41afc0552288d3aba9c6efdd78903b802926f4879"
+checksum = "7303ef2c05cd654186cb250d29049a24840ca25d2747c25c0381c8d9e2f582e8"
 dependencies = [
  "proc-macro2",
  "quote",
