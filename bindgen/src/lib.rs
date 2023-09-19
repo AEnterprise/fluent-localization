@@ -158,7 +158,7 @@ pub fn bind_localizations(_meta: TokenStream) -> TokenStream {
                 let missing_messages: Vec<&str> = expected_messages.into_iter().filter(|name| !found_messages.contains(&name.to_string())).collect();
                 let missing_terms: Vec<&str> = expected_terms.into_iter().filter(|name| !found_terms.contains(&name.to_string())).collect();
                 if missing_messages.is_empty() && missing_terms.is_empty()  {
-                    tracing::info!("Default bundle ({default_lang} is valid");
+                    tracing::info!("Default bundle ({default_lang}) is valid");
                     Ok(())
                 } else {
                     Err(fluent_localization_loader::LocalizationLoadingError::new(format!("The following localization keys where not found in the default language bundle: {}", fluent_localization_loader::fold_displayable(missing_messages.into_iter().map(|name| name.to_string()).chain(missing_terms.into_iter().map(|name| format!("-{name}"))), ", "))))?
