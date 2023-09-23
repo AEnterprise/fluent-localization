@@ -74,11 +74,6 @@ impl LocalizationHolder {
             let underlying_name = item_handle.file_name();
             let lang_name = underlying_name.to_string_lossy();
 
-            if lang_name == default {
-                //We already loaded the default first
-                continue;
-            }
-
             let meta = item_handle
                 .file_type()
                 .with_context(|| format!("Failed to get item metadata for {lang_name}"))?;
@@ -133,7 +128,7 @@ pub fn base_path() -> PathBuf {
 /// Get the current default language, this is controlled by the `DEFAULT_LANG` environment variable.
 /// Will default to `DEFAULT` if not set
 pub fn get_default_language() -> Result<LanguageIdentifier> {
-    let value = env::var("DEFAULT_LANG").unwrap_or(DEFAULT_DIR.to_string());
+    let value = env::var("DEFAULT_LANG").unwrap_or("en_US".to_string());
     value
         .parse::<LanguageIdentifier>()
         .with_context(|| format!("Invalid default langauge: {value}"))
