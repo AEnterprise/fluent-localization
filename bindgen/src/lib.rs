@@ -65,11 +65,13 @@ pub fn bind_localizations(_meta: TokenStream) -> TokenStream {
         .filter(|(_, node)| node.term)
         .map(|(name, _)| syn::LitStr::new(name.as_str(), proc_macro2::Span::call_site()))
         .collect();
+    let term_count = all_terms.len();
     let all_messages: Vec<LitStr> = nodes_map
         .iter()
         .filter(|(_, node)| !node.term)
         .map(|(name, _)| syn::LitStr::new(name.as_str(), proc_macro2::Span::call_site()))
         .collect();
+    let message_count = all_messages.len();
     //println!("{all_names:?}");
 
     //Nodes can depend on other nodes, copy over all the dependecies where needed
@@ -110,6 +112,9 @@ pub fn bind_localizations(_meta: TokenStream) -> TokenStream {
     // General code for validating the bundle and handling errors
 
     let mut code = quote! {
+        const MESSAGES: [&str; #message_count] = [#(#all_messages,)*];
+        const TERMS: [&str; #term_count] = [#(#all_terms,)*];
+
         pub struct LanguageLocalizer<'a> {
             localizations: &'a fluent_localization_loader::LocalizationHolder,
             language: &'a str,
@@ -127,8 +132,6 @@ pub fn bind_localizations(_meta: TokenStream) -> TokenStream {
 
             pub fn validate_default_bundle_complete() -> anyhow::Result<()> {
                 tracing::debug!("Validating default bundle has all expected keys");
-                let expected_messages: Vec<&str> = vec![#(#all_messages,)*];
-                let expected_terms: Vec<&str> = vec![#(#all_terms,)*];
                 let mut base_dir = fluent_localization_loader::base_path();
                 let default_lang = fluent_localization_loader::get_default_language()?;
 
@@ -155,8 +158,8 @@ pub fn bind_localizations(_meta: TokenStream) -> TokenStream {
                 }
             });
 
-                let missing_messages: Vec<&str> = expected_messages.into_iter().filter(|name| !found_messages.contains(&name.to_string())).collect();
-                let missing_terms: Vec<&str> = expected_terms.into_iter().filter(|name| !found_terms.contains(&name.to_string())).collect();
+                let missing_messages: Vec<&str> = MESSAGES.into_iter().filter(|name| !found_messages.contains(&name.to_string())).collect();
+                let missing_terms: Vec<&str> = TERMS.into_iter().filter(|name| !found_terms.contains(&name.to_string())).collect();
                 if missing_messages.is_empty() && missing_terms.is_empty()  {
                     tracing::info!("Default bundle ({default_lang}) is valid");
                     Ok(())
