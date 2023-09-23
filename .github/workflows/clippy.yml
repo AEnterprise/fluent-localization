@@ -11,8 +11,13 @@ env:
 
 jobs:
   build:
+    name: Compile and style test
 
     runs-on: ubuntu-latest
+
+    permissions:
+      checks: write
+      contents: read
 
     steps:
     - name: Checkout
@@ -22,4 +27,12 @@ jobs:
       uses: Swatinem/rust-cache@v2
 
     - name: Build
-      run: cargo clippy
+      run: cargo check
+
+    - name: Check formatting
+      run: cargo fmt --all -- --check
+
+    - name: Clippy
+      uses: clechasseur/rs-clippy-check@v3.0.0
+      with:
+        args: --all-features
