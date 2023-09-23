@@ -108,7 +108,7 @@ impl LocalizationHolder {
     pub fn get_bundle(&self, language: &str) -> &FluentBundle {
         self.bundles
             .get(language)
-            .unwrap_or_else(|| self.get_bundle(language))
+            .unwrap_or_else(|| self.get_bundle(&self.default_language))
     }
 
     pub fn get_default_bundle(&self) -> &FluentBundle {
