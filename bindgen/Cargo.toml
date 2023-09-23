@@ -1,6 +1,6 @@
 [package]
 name = "fluent-localization-bindgen"
-version = "1.0.1"
+version = "1.0.2"
 edition = "2021"
 keywords = ["fluent", "localization", "bindgen"]
 description = "Easy loading of fluent localization resources and generating code bindings for them"
