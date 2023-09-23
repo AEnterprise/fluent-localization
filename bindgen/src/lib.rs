@@ -112,8 +112,8 @@ pub fn bind_localizations(_meta: TokenStream) -> TokenStream {
     // General code for validating the bundle and handling errors
 
     let mut code = quote! {
-        const MESSAGES: [&str; #message_count] = [#(#all_messages,)*];
-        const TERMS: [&str; #term_count] = [#(#all_terms,)*];
+        pub const MESSAGES: [&str; #message_count] = [#(#all_messages,)*];
+        pub const TERMS: [&str; #term_count] = [#(#all_terms,)*];
 
         pub struct LanguageLocalizer<'a> {
             localizations: &'a fluent_localization_loader::LocalizationHolder,
