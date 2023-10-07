@@ -52,7 +52,7 @@ dependencies = [
 
 [[package]]
 name = "fluent-localization-bindgen"
-version = "1.0.3"
+version = "1.0.4"
 dependencies = [
  "fluent-bundle",
  "fluent-localization-loader",
