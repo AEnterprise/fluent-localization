@@ -227,6 +227,7 @@ pub fn bind_localizations(_meta: TokenStream) -> TokenStream {
     code.extend(compiled_simple_block);
 
     //Now it gets real, welcome to generated generics
+    // ! sorting is needed on the names because otherwise their order is random and not consistent between compilations!
     let hell = nodes_map
         .iter()
         .filter(|(_, node)| !node.variables.is_empty() && !node.term)
@@ -244,11 +245,14 @@ pub fn bind_localizations(_meta: TokenStream) -> TokenStream {
                 })
                 + "\n";
 
+            let mut variables: Vec<&&str> = node.variables.iter().collect();
+            variables.sort_unstable_by_key(|value| value.to_lowercase());
+
             let mut letter_iter = letters.iter();
             let mut params = String::from("&self");
             let mut handle_arguments =
                 String::from("let mut arguments = fluent_bundle::FluentArgs::new();");
-            for name in &node.variables {
+            for name in variables {
                 let sanitized_name = sanitize(name);
                 // safe to unwrap, we generated the letters based on the variable count above
                 let letter = letter_iter.next().unwrap();
