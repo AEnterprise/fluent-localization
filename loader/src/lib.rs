@@ -164,8 +164,8 @@ pub fn load_resources_from_folder(path: PathBuf) -> Result<Vec<Resource>> {
             .file_type()
             .with_context(|| format!("Failed to get item metadata for {path_name}/{name}"))?;
 
-        if meta.is_dir() {
-            warn!("Skipping {path_name}/{name} because it is a directory");
+        if !meta.is_file() {
+            debug!("Skipping {path_name}/{name} because it is not a file");
             continue;
         }
 
