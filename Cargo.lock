@@ -49,11 +49,25 @@ name = "fluent-localization-bindgen"
 version = "1.0.4"
 dependencies = [
  "fluent-bundle",
- "fluent-localization-loader",
+ "fluent-localization-loader 1.0.3",
  "fluent-syntax",
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "fluent-localization-loader"
+version = "1.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "53467a8cca8b10b19fb171d4a0b7c27079895b4c8934f718d811263586e33f79"
+dependencies = [
+ "anyhow",
+ "fluent-bundle",
+ "fluent-syntax",
+ "intl-memoizer",
+ "tracing",
+ "unic-langid",
 ]
 
 [[package]]
