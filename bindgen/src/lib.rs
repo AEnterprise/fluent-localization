@@ -7,7 +7,7 @@ use std::{
 
 use fluent_bundle::FluentResource;
 use fluent_localization_loader::{
-    base_path, fold_displayable, load_resources_from_folder, DEFAULT_DIR,
+    DEFAULT_DIR, base_path, fold_displayable, load_resources_from_folder,
 };
 use fluent_syntax::ast::{Entry, Expression, InlineExpression, PatternElement};
 use proc_macro::TokenStream;
@@ -295,7 +295,9 @@ fn sanitize(original: &str) -> String {
 
 fn get_letters(amount: usize) -> Vec<char> {
     if amount > 26 {
-        todo!("Localization strings with 26+ params, what the hell is this? are we assembling a phone book?");
+        todo!(
+            "Localization strings with 26+ params, what the hell is this? are we assembling a phone book?"
+        );
     }
     (0..amount).map(|count| ALPHABET[count]).collect()
 }

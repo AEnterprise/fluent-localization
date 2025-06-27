@@ -1,6 +1,6 @@
 use std::{collections::HashMap, env, error::Error, fmt::Display, fs, path::PathBuf, sync::Arc};
 
-use fluent_bundle::{bundle::FluentBundle as RawBundle, FluentResource};
+use fluent_bundle::{FluentResource, bundle::FluentBundle as RawBundle};
 
 use anyhow::{Context, Result};
 use fluent_syntax::parser::ParserError;
@@ -170,7 +170,9 @@ pub fn load_resources_from_folder(path: PathBuf) -> Result<Vec<Resource>> {
         }
 
         if !name.ends_with(FILE_EXTENSION) {
-            warn!("Skipping {path_name}/{name} because it doesn't have the proper {FILE_EXTENSION} extension");
+            warn!(
+                "Skipping {path_name}/{name} because it doesn't have the proper {FILE_EXTENSION} extension"
+            );
             continue;
         }
 
@@ -247,7 +249,10 @@ fn prettify_parse_error(file_content: &str, e: ParserError) -> String {
 
     loop {
         let Some((len, l)) = line_endings.next() else {
-            error!("Somehow fluent-rs reported a error that is past the end of the file? Was at pos {}, looking for {}", pos, e.pos.start);
+            error!(
+                "Somehow fluent-rs reported a error that is past the end of the file? Was at pos {}, looking for {}",
+                pos, e.pos.start
+            );
             break;
         };
 
