@@ -33,6 +33,6 @@ jobs:
       run: cargo fmt --all -- --check
 
     - name: Clippy
-      uses: clechasseur/rs-clippy-check@v4.0.4
+      uses: clechasseur/rs-clippy-check@v4.0.5
       with:
         args: --all-features
