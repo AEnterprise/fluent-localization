@@ -14,7 +14,7 @@ repository = "https://github.com/AEnterprise/fluent-localization"
 tracing = "0.1"
 anyhow = "1.0"
 fluent-syntax = "0.11"
-fluent-bundle = "0.15"
+fluent-bundle = "0.16"
 intl-memoizer = "0.5"
 unic-langid = { version = "0.9" }
 quote = "1"
